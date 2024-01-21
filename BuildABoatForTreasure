@@ -1,0 +1,117 @@
+local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/Arceus-X-UI-Library/main/source.lua"))()
+-- Set the title
+lib:SetTitle("Sctipt By X9anto/Tg @X9anto")
+-- Set the icon
+lib:SetIcon("http://www.roblox.com/asset/?id=15235770505")
+-- Varibles
+local flyspeed = 1
+local AutoStartBread = false
+local AutoFarmGold = false
+local noclip = false
+
+function StopMissions()
+    local args = {
+        [1] = 0
+    workspace.QuestMakerEvent:FireServer(unpack(args))
+end
+
+function StartBread()
+    local args = {
+        [1] = 100
+    workspace.QuestMakerEvent:FireServer(unpack(args))
+end
+
+function StartGift()
+    local args = {
+        [1] = 99
+    workspace.QuestMakerEvent:FireServer(unpack(args))
+end
+
+function StartChirstmass()
+    local args = {
+        [1] = 102
+    workspace.QuestMakerEvent:FireServer(unpack(args))
+end
+
+-- Functions
+lib:AddButton("Stop missions", function()
+    StopMissions()
+end)
+-- Functions
+lib:AddButton("Start Bread mission", function()
+    StartBread()
+end)
+-- Functions
+lib:AddButton("Start Gift mission", function()
+    StartGift()
+end)
+-- Functions
+lib:AddButton("Start Chirstmass mission", function()
+    StartChirstmass()
+end)
+
+-- Toggle+
+lib:AddToggle("AutoStart Bread Mission", function(state)
+    if state then
+        AutoStartBread == true
+        StartBread()
+        while AutoStartBread == true do
+            wait(90)
+            StartBread()
+        end
+    else
+        AutoStartBread == false
+        StopMissions()
+    end
+end,false)
+
+-- Toggle
+lib:AddToggle("Noclip", function(state)
+    if state then
+        noclip = true
+    else
+        noclip = false
+    end
+end,false)
+
+-- Toggle
+lib:AddToggle("AutoFarm(Not Working)", function(state)
+    if state then
+        
+    else
+        
+    end
+end,false)
+
+-- ComboBox
+--lib:AddComboBox("FlySpeed", {"Speed:1","Speed:5","Speed:10","Speed:15","Speed:20","Speed:25"}, function(selection)
+   -- if selection == "1" then
+      --  FlySpeed = 1
+   -- elseif selection == "5" then
+      --  FlySpeed = 5
+   -- elseif selection == "10" then
+      --  FlySpeed = 10
+   -- elseif selection == "15" then
+      --  FlySpeed = 15
+   -- elseif selection == "20" then
+       -- FlySpeed = 20
+   -- elseif selection == "25" then
+       -- FlySpeed = 25
+   -- end
+--end)
+
+-- Set the Background Color (optional)
+lib:SetBackgroundColor(32, 32, 32)
+-- Set the X button color (optional)
+lib:SetCloseBtnColor(255, 0, 0)
+-- Set the title color (optional)
+lib:SetTitleColor(255, 0, 0)
+-- Set the Buttons background color.
+lib:SetButtonsColor(128, 128, 128)
+
+--Noclip
+game.GetService('RunService').Stepped:Connect(function()
+    if noclip then
+        game.Players.LocalPlayer.Character.Humanoid:ChangeState(11) 
+    end
+end)
